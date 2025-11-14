@@ -1,3 +1,4 @@
+
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQFABE9Tm8vvxKX4E93wHg1U8Nq7NmbiWdkfc1mVC0zz69eJFKuQn-FE0PtHDzN4TtbGjhUPFYWbhF0/pub?output=csv";
 
 fetch(SHEET_CSV_URL)
@@ -12,7 +13,7 @@ fetch(SHEET_CSV_URL)
       row.forEach(cell => {
         const cellEl = document.createElement(i === 0 ? "th" : "td");
         cellEl.textContent = cell.replace(/^"|"$/g, "");
-        cellEl.style.border = "1px solid var(--muted)";
+        cellEl.style.border = "1px solid #ccc";
         cellEl.style.padding = "8px";
         cellEl.style.textAlign = "left";
         tr.appendChild(cellEl);
@@ -22,8 +23,6 @@ fetch(SHEET_CSV_URL)
     document.getElementById("sheet-table-container").appendChild(table);
   })
   .catch(err => {
-    console.error("Error loading sheet data:", err);
-    const p = document.createElement("p");
-    p.textContent = "Unable to load data.";
-    document.getElementById("sheet-table-container").appendChild(p);
+    console.error("Error:", err);
+    document.getElementById("sheet-table-container").innerHTML = "Unable to load sheet.";
   });
